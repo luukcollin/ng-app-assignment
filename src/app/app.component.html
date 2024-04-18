@@ -1,0 +1,36 @@
+<main>
+  <label for="product-name-input">Add product with name: </label>
+  <input id="product-name-input" [formControl]="newProductName" type="text">
+  <button (click)="addProduct()">Add product</button>
+  <div class="list">
+    <span>filter by: </span>
+    <input [formControl]="filterQ" type="text">
+    <h2>Filtered by {{filterQ.value}}</h2>
+
+    <table>
+      <th> <button (click)="toggleImages()">Toggle images</button></th>
+      <th>Product</th>
+      <th>Code</th>
+      <th>Available</th>
+      <th>Price</th>
+      <th>5 star rating</th>
+      @for(item of visibleRows; track item.code){
+      <tr class="row" (click)="selectItem(item)" (dblclick)="removeItem(item)"
+        [class.selected]="selectedProduct === item">
+        @if(imagesAreVisible){
+        <td><img [src]="item.imageUrl" /></td>
+        }@else {
+        <td>{{item.imageUrl}}</td>
+        }
+        <td><a [href]="item.imageUrl">{{item.name}}</a></td>
+        <td>{{item.code}}</td>
+        <td>{{item.available | date:'dd/MM/YYYY'}}</td>
+        <td>{{item.price}}</td>
+        <td><app-star [filled]="item.rating === 5" (click)="onClickStar(item)"></app-star></td>
+      </tr>
+      }
+    </table>
+    <app-star [filled]="false"></app-star>
+  </div>
+</main>
+<router-outlet />

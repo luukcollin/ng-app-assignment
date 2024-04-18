@@ -1,0 +1,17 @@
+$selected-bg-clr: rgba(233, 233, 233, .64);
+
+
+.row {
+    &:hover {
+        cursor: pointer;
+    }
+
+    &.selected {
+        background: $selected-bg-clr;
+    }
+}
+
+app-star {
+    width: 3em;
+    aspect-ratio: 1/1;
+}
